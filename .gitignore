@@ -1,0 +1,22 @@
+# to be ignored
+*ms
+*.blf
+*.LOG*
+
+# files
+sam
+BBI
+ELAM
+VSMIDK
+system
+default
+drivers
+security
+software
+components
+BCD-Template
+
+# subdirectories
+TxR/
+RegBack/
+systemprofile/
