@@ -22,4 +22,4 @@ ADD . /maps
 ENV PATH="/maps/bin:${PATH}"
 RUN source /maps/bin/activate
 
-ENTRYPOINT ["/maps/Scripts/entrypoint.sh"]
+ENTRYPOINT ["/maps/entrypoint.sh"]
