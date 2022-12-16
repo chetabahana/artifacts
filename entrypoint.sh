@@ -121,9 +121,9 @@ node -v && npm -v
 
 # Restore modification time (mtime) of git files
 echo -e "$hr\nEPOCH TEST\n$hr"
-/maps/Scripts/restore.sh
-/maps/Scripts/prime_list.sh
-/maps/Scripts/init_environment.sh
+/maps/Journal/Scripts/restore.sh
+/maps/Journal/Scripts/prime_list.sh
+/maps/Journal/Scripts/init_environment.sh
 
 # Clean up bundler cache
 CLEANUP_BUNDLER_CACHE_DONE=false
@@ -131,7 +131,7 @@ bundle config path ${GEM_PATH}
 bundle config cache_all true
 
 cleanup_bundler_cache() {
-  /maps/Scripts/cleanup_bundler.sh
+  /maps/Journal/Scripts/cleanup_bundler.sh
   rm -rf ${GEM_HOME} && mkdir -p ${GEM_HOME}
   gem install bundler -v "${BUNDLER_VER}" &>/dev/null
   echo -e "\nCLEANUP BUNDLE\n$hr" && bundle install
@@ -185,7 +185,7 @@ build_jekyll || {
 
 # Check if deploy on the same repository branch
 if [[ "${PROVIDER}" == "github" ]]; then
-  /maps/Scripts/github_pages.sh
+  /maps/Journal/Scripts/github_pages.sh
 else
   echo -e "${PROVIDER} is an unsupported provider."
   exit 1
