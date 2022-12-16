@@ -16,7 +16,5 @@ software
 components
 BCD-Template
 
-# subdirectories
-TxR/
-RegBack/
-systemprofile/
+# subdirs
+AppData/

@@ -1,0 +1,18 @@
+{
+   "id": 65,
+   "title": "publikasi",
+   "cards":[
+        {
+           "html":"<div class='github-card' data-github='Chetabahana' data-width='200' data-height='400' data-theme='medium'></div>"
+        },
+        {
+           "html":"<div class='github-card' data-github='FeedMapping' data-width='200' data-height='400' data-theme='medium'></div>"
+        },
+        {
+           "html":"<div class='github-card' data-github='eQ19' data-width='200' data-height='400' data-theme='medium'></div>"
+        },
+        {
+           "html":"<div class='github-card' data-github='MarketLeader' data-width='200' data-height='400' data-theme='medium'></div>"
+        }
+    ]
+}
