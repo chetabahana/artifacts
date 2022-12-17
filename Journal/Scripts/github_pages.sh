@@ -16,11 +16,6 @@ deploy_remote() {
   rm -rf .git
 }
 
-find_remote() {
-  [[ "$sm_path" == */* ]] || git config remote.origin.url
-}
-
-export -f find_remote
 
 if [[ "${OWNER}" == "eq19" ]]; then
   cd ${VENDOR_BUNDLE}/keras && touch .nojekyll && mv -f /maps/.gitattributes .
@@ -29,6 +24,12 @@ if [[ "${OWNER}" == "eq19" ]]; then
 fi
 
 cd ${WORKING_DIR}/build && touch .nojekyll
+
+find_remote() {
+  [[ "$sm_path" == */* ]] || git config remote.origin.url
+}
+
+export -f find_remote
 # https://unix.stackexchange.com/a/196402/158462
 REPOSITORY=$(git submodule foreach -q find_remote)
 REPOSITORY=${REPOSITORY/"https://github.com/"/""}
