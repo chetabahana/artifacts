@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
-
 echo -e "$hr\nDEPLOYMENT\n$hr"
-echo -e "Deploying to ${GITHUB_REPOSITORY} on branch ${BRANCH}"
-echo -e "Deploying to https://github.com/${GITHUB_REPOSITORY}.git\n"
 
 deploy_remote() {
   REMOTE_REPO="https://${ACTOR}:${TOKEN}@github.com/${REPOSITORY}.git"
@@ -26,7 +22,7 @@ find_remote() {
 
 export -f find_remote
 
-if [[ "${GITHUB_REPOSITORY_OWNER}" == "eq19" ]]; then
+if [[ "${OWNER}" == "eq19" ]]; then
   cd ${VENDOR_BUNDLE}/keras && touch .nojekyll && mv -f /maps/.gitattributes .
   export REPOSITORY=eq19/default && apt-get install git-lfs &>/dev/null
   git init && git lfs install && deploy_remote
@@ -34,8 +30,9 @@ fi
 
 cd ${WORKING_DIR}/build && touch .nojekyll
 # https://unix.stackexchange.com/a/196402/158462
-REPOSITORY=$(git submodule foreach -q bash -c 'find_remote')
+REPOSITORY=$(git submodule foreach -q find_remote)
 REPOSITORY=${REPOSITORY/"https://github.com/"/""}
+echo -e "Deploying to ${REPOSITORY} on branch ${BRANCH}"
 git init && deploy_remote
 
 exit $?
