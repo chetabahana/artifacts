@@ -5,5 +5,6 @@ if [[ "$sm_path" != */* ]]; then
   REPOSITORY=${REPOSITORY/"https://github.com/"/""}
 
   cd ${WORKING_DIR}/build && rm -rf .git
+  source /maps/Journal/Scripts/deploy_remote.sh
   git init && touch .nojekyll && deploy_remote "${REPOSITORY}"
 fi

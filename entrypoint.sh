@@ -185,32 +185,18 @@ build_jekyll || {
 }
 
 
-deploy_remote() {
-  echo -e "Deploying to $1 on branch ${BRANCH}"
-  REMOTE_REPO="https://${ACTOR}:${TOKEN}@github.com/$1.git"
-  git remote add origin ${REMOTE_REPO} && git fetch &>/dev/null
-
-  if [[ "$1" != "${GITHUB_REPOSITORY}" ]]; then
-    SHOW_ALL=`git show-branch --all | grep -w ${BRANCH}`
-    [ $? == 0 ] && git push origin --delete ${BRANCH}
-  fi
-
-  git add . && git commit -m "jekyll build from Action ${GITHUB_SHA}"
-  git push --force --quiet ${REMOTE_REPO} master:${BRANCH}
-}
-
-
 echo -e "$hr\nDEPLOYMENT\n$hr"
 if [[ "${OWNER}" == "eq19" ]]; then
   cd ${VENDOR_BUNDLE}/keras && rm -rf .git && apt-get install git-lfs
   mv -f /maps/.gitattributes && git init && git lfs install
+  source /maps/Journal/Scripts/deploy_remote.sh
   touch .nojekyll && deploy_remote "eq19/default"
 fi
 
 
 export -f deploy_remote && cd ${WORKING_DIR}
 # https://unix.stackexchange.com/a/83895/158462
-git submodule foreach -q bash -c source /maps/Journal/Scripts/github_pages.sh
+git submodule foreach -q /maps/Journal/Scripts/github_pages.sh
 
 
 apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
