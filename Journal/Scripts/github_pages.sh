@@ -31,7 +31,7 @@ find_remote() {
 
 export -f find_remote
 # https://unix.stackexchange.com/a/196402/158462
-REPOSITORY=$(git submodule foreach -q find_remote)
+REPOSITORY=$(git submodule foreach -q bash -c 'find_remote')
 REPOSITORY=${REPOSITORY/"https://github.com/"/""}
 echo -e "Deploying to ${REPOSITORY} on branch ${BRANCH}"
 #git init && deploy_remote
