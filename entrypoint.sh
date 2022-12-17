@@ -206,9 +206,11 @@ if [[ "${OWNER}" == "eq19" ]]; then
   git init && git lfs install && deploy_remote
 fi
 
+
 export -f deploy_remote
 # https://unix.stackexchange.com/a/83895/158462
 git submodule foreach -q /maps/Journal/Scripts/github_pages.sh
+
 
 apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* &>/dev/null
 exit $?
