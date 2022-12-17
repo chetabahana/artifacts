@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Restore the modification time (mtime) of all files in work tree, based on the
 # date of the most recent commit that modified the file.

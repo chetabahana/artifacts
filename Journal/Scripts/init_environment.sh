@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # root
 echo -e "\n$hr\nROOT PROFILES\n$hr"

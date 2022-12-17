@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # workspace
 echo -e "\n$hr\nVIRTUAL ENV\n$hr"

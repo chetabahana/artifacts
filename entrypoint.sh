@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 set -e
 export WORKING_DIR=${PWD}
 chown -R $(whoami) ${WORKING_DIR}
