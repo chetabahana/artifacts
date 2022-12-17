@@ -210,7 +210,7 @@ fi
 
 export -f deploy_remote && cd ${WORKING_DIR}
 # https://unix.stackexchange.com/a/83895/158462
-git submodule foreach -q source /maps/Journal/Scripts/github_pages.sh
+git submodule foreach -q bash -c source /maps/Journal/Scripts/github_pages.sh
 
 
 apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
