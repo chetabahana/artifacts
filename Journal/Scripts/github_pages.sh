@@ -25,14 +25,14 @@ fi
 
 
 # https://unix.stackexchange.com/a/196402/158462
-git submodule foreach -q '
-  if [[ "$sm_path" != */* ]]; then 
-    REPOSITORY=$(git config remote.origin.url)
-    REPOSITORY=${REPOSITORY/"https://github.com/"/""}
-    echo -e "Deploying to ${REPOSITORY} on branch ${BRANCH}"
+git submodule foreach -q "
+  if [ \$sm_path != *\/*  ]; then 
+    REPOSITORY=\$(git config remote.origin.url)
+    REPOSITORY=\${REPOSITORY\/'https:\/\/github.com\/'\/''}
+    echo Deploying to \${REPOSITORY} on branch \${BRANCH}'
     #cd ${WORKING_DIR}/build && rm -rf .git
     #git init && touch .nojekyll && deploy_remote
   fi
-'
+"
 
 exit $?
