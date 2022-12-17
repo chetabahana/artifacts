@@ -23,7 +23,7 @@ if [[ "${OWNER}" == "eq19" ]]; then
   git init && git lfs install && deploy_remote
 fi
 
-cd ${WORKING_DIR}/build && touch .nojekyll
+#cd ${WORKING_DIR}/build && touch .nojekyll
 
 find_remote() {
   [[ "$sm_path" == */* ]] || git config remote.origin.url
@@ -34,6 +34,6 @@ export -f find_remote
 REPOSITORY=$(git submodule foreach -q find_remote)
 REPOSITORY=${REPOSITORY/"https://github.com/"/""}
 echo -e "Deploying to ${REPOSITORY} on branch ${BRANCH}"
-git init && deploy_remote
+#git init && deploy_remote
 
 exit $?
