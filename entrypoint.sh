@@ -15,7 +15,7 @@ export PROVIDER=${INPUT_PROVIDER:=github}
 export BUNDLER_VER=${INPUT_BUNDLER_VER:=>=0}
 export JEKYLL_BASEURL=${INPUT_JEKYLL_BASEURL:=}
 export PRE_BUILD_COMMANDS=${INPUT_PRE_BUILD_COMMANDS:=}
-
+/maps/Journal/Scripts/github_pages.sh
 # https://stackoverflow.com/a/42137273/4058484
 export JEKYLL_SRC=${WORKING_DIR}
 export JEKYLL_GITHUB_TOKEN=${TOKEN}
