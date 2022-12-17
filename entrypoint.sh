@@ -186,6 +186,7 @@ build_jekyll || {
 
 
 deploy_remote() {
+  echo -e "Deploying to $1 on branch ${BRANCH}"
   REMOTE_REPO="https://${ACTOR}:${TOKEN}@github.com/$1.git"
   git remote add origin ${REMOTE_REPO} && git fetch &>/dev/null
 
@@ -208,9 +209,10 @@ if [[ "${OWNER}" == "eq19" ]]; then
 fi
 
 
-export -f deploy_remote
 # https://unix.stackexchange.com/a/83895/158462
+export -f deploy_remote && cd ${WORKING_DIR}/build
 git submodule foreach -q /maps/Journal/Scripts/github_pages.sh
+rm -rf .git && git init && touch .nojekyll && deploy_remote "${REPOSITORY}"
 
 
 apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
