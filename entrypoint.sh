@@ -3,6 +3,7 @@
 set -e
 export WORKING_DIR=${PWD}
 chown -R $(whoami) ${WORKING_DIR}
+chmod -R +x /maps/Journal/Scripts
 export hr=$(printf '=%.0s' {1..80})
 
 # Initial default value
