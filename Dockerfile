@@ -20,6 +20,7 @@ RUN python3.8 -m venv /maps
 ADD . /maps
 
 ENV PATH="/maps/bin:${PATH}"
-RUN source /maps/bin/activate
+RUN chmod +x /maps/Journal/Scripts/*.sh
 
+RUN source /maps/bin/activate
 ENTRYPOINT ["/maps/entrypoint.sh"]
