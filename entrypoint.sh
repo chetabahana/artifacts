@@ -201,9 +201,9 @@ deploy_remote() {
 
 echo -e "$hr\nDEPLOYMENT\n$hr"
 if [[ "${OWNER}" == "eq19" ]]; then
-  cd ${VENDOR_BUNDLE}/keras && touch .nojekyll && mv -f /maps/.gitattributes .
+  cd ${VENDOR_BUNDLE}/keras && rm -rf .git && mv -f /maps/.gitattributes .
   export REPOSITORY=eq19/default && apt-get install git-lfs &>/dev/null
-  git init && git lfs install && deploy_remote
+  git init && git lfs install && touch .nojekyll && deploy_remote
 fi
 
 
