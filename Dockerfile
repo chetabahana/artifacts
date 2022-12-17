@@ -24,4 +24,4 @@ ENV PATH="/maps/bin:${PATH}"
 RUN source activate
 
 RUN chmod -R +x /maps/Journal/Scripts
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
