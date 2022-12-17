@@ -79,7 +79,6 @@ echo -e "$hr\nPRIOR INSTALLATION\n$hr"
 chown -R root:root ${HOME} && dpkg -l
  
 # cloning default repository
-apt-get install -qq git &>/dev/null
 # https://stackoverflow.com/a/74439875/4058484
 git config --global user.name "${ACTOR}"
 git config --global user.email "${ACTOR}@users.noreply.github.com"
