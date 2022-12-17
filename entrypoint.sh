@@ -186,10 +186,10 @@ build_jekyll || {
 
 
 deploy_remote() {
-  REMOTE_REPO="https://${ACTOR}:${TOKEN}@github.com/${REPOSITORY}.git"
+  REMOTE_REPO="https://${ACTOR}:${TOKEN}@github.com/$1.git"
   git remote add origin ${REMOTE_REPO} && git fetch &>/dev/null
 
-  if [[ "${REPOSITORY}" != "${GITHUB_REPOSITORY}" ]]; then
+  if [[ "$1" != "${GITHUB_REPOSITORY}" ]]; then
     SHOW_ALL=`git show-branch --all | grep -w ${BRANCH}`
     [ $? == 0 ] && git push origin --delete ${BRANCH}
   fi
@@ -204,7 +204,8 @@ echo -e "$hr\nDEPLOYMENT\n$hr"
 if [[ "${OWNER}" == "eq19" ]]; then
   cd ${VENDOR_BUNDLE}/keras && rm -rf .git && mv -f /maps/.gitattributes .
   export REPOSITORY=eq19/default && apt-get install git-lfs
-  git init && git lfs install && touch .nojekyll && deploy_remote
+  git init && git lfs install && touch .nojekyll
+  deploy_remote "${REPOSITORY}"
 fi
 
 

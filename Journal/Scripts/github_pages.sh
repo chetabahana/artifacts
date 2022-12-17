@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 if [[ "$sm_path" != */* ]]; then 
+  cd ${WORKING_DIR}/build
   REPOSITORY=$(git config remote.origin.url)
-  export REPOSITORY=${REPOSITORY/"https://github.com/"/""}
+  REPOSITORY=${REPOSITORY/"https://github.com/"/""}
   echo -e "Deploying to ${REPOSITORY} on branch ${BRANCH}"
-  cd ${WORKING_DIR}/build && rm -rf .git
-  git init && touch .nojekyll && deploy_remote
+  rm -rf .git && git init && touch .nojekyll && deploy_remote "${REPOSITORY}"
 fi
