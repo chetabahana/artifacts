@@ -24,7 +24,8 @@ if [[ "${OWNER}" == "eq19" ]]; then
 fi
 
 
-find_remote() {
+# https://unix.stackexchange.com/a/196402/158462
+git submodule foreach -q '
   if [[ "$sm_path" != */* ]]; then 
     REPOSITORY=$(git config remote.origin.url)
     REPOSITORY=${REPOSITORY/"https://github.com/"/""}
@@ -32,9 +33,6 @@ find_remote() {
     #cd ${WORKING_DIR}/build && rm -rf .git
     #git init && touch .nojekyll && deploy_remote
   fi
-}
+'
 
-
-# https://unix.stackexchange.com/a/196402/158462
-git submodule foreach -q find_remote
 exit $?
