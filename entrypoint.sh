@@ -197,7 +197,6 @@ deploy_remote() {
 
   git add . && git commit -m "jekyll build from Action ${GITHUB_SHA}"
   git push --force --quiet ${REMOTE_REPO} master:${BRANCH}
-  rm -rf .git
 }
 
 
@@ -209,10 +208,9 @@ if [[ "${OWNER}" == "eq19" ]]; then
 fi
 
 
+export -f deploy_remote && cd ${WORKING_DIR}
 # https://unix.stackexchange.com/a/83895/158462
-export -f deploy_remote && cd ${WORKING_DIR}/build
 git submodule foreach -q /maps/Journal/Scripts/github_pages.sh
-rm -rf .git && git init && touch .nojekyll && deploy_remote "${REPOSITORY}"
 
 
 apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
