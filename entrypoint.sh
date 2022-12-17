@@ -15,7 +15,7 @@ export PROVIDER=${INPUT_PROVIDER:=github}
 export BUNDLER_VER=${INPUT_BUNDLER_VER:=>=0}
 export JEKYLL_BASEURL=${INPUT_JEKYLL_BASEURL:=}
 export PRE_BUILD_COMMANDS=${INPUT_PRE_BUILD_COMMANDS:=}
-/maps/Journal/Scripts/github_pages.sh
+
 # https://stackoverflow.com/a/42137273/4058484
 export JEKYLL_SRC=${WORKING_DIR}
 export JEKYLL_GITHUB_TOKEN=${TOKEN}
@@ -183,13 +183,32 @@ build_jekyll || {
   build_jekyll
 }
 
-# Check if deploy on the same repository branch
-if [[ "${PROVIDER}" == "github" ]]; then
-  /maps/Journal/Scripts/github_pages.sh
-else
-  echo -e "${PROVIDER} is an unsupported provider."
-  exit 1
+
+deploy_remote() {
+  REMOTE_REPO="https://${ACTOR}:${TOKEN}@github.com/${REPOSITORY}.git"
+  git remote add origin ${REMOTE_REPO} && git fetch &>/dev/null
+
+  if [[ "${REPOSITORY}" != "${GITHUB_REPOSITORY}" ]]; then
+    SHOW_ALL=`git show-branch --all | grep -w ${BRANCH}`
+    [ $? == 0 ] && git push origin --delete ${BRANCH}
+  fi
+
+  git add . && git commit -m "jekyll build from Action ${GITHUB_SHA}"
+  git push --force --quiet ${REMOTE_REPO} master:${BRANCH}
+  rm -rf .git
+}
+
+
+echo -e "$hr\nDEPLOYMENT\n$hr"
+if [[ "${OWNER}" == "eq19" ]]; then
+  cd ${VENDOR_BUNDLE}/keras && touch .nojekyll && mv -f /maps/.gitattributes .
+  export REPOSITORY=eq19/default && apt-get install git-lfs &>/dev/null
+  git init && git lfs install && deploy_remote
 fi
+
+# https://unix.stackexchange.com/a/83895/158462
+export -f deploy_remote
+git submodule foreach -q /maps/Journal/Scripts/github_pages.sh
 
 apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* &>/dev/null
 exit $?
