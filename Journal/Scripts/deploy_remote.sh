@@ -11,5 +11,5 @@ deploy_remote() {
   fi
 
   git add . && git commit -m "jekyll build from Action ${GITHUB_SHA}"
-  git push --force ${REMOTE_REPO} master:${BRANCH}
+  git push --force --quiet ${REMOTE_REPO} master:${BRANCH}
 }
