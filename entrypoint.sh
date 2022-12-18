@@ -190,7 +190,7 @@ if [[ "${OWNER}" == "eq19" ]]; then
   cd ${VENDOR_BUNDLE}/keras && rm -rf .git && apt-get install git-lfs
   mv -f /maps/.gitattributes . && git init && git lfs install
   source /maps/Journal/Scripts/deploy_remote.sh
-  touch .nojekyll && deploy_remote "eq19/feed"
+  touch .nojekyll && deploy_remote "eq19/default"
 fi
 
 
