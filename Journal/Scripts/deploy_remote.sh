@@ -3,7 +3,7 @@
 deploy_remote() {
   echo -e "Deploying to $1 on branch ${BRANCH}"
   REMOTE_REPO="https://${ACTOR}:${TOKEN}@github.com/$1.git"
-  git remote add origin ${REMOTE_REPO} && git fetch &>/dev/null
+  git remote add origin ${REMOTE_REPO} && git fetch
 
   if [[ "$1" != "${GITHUB_REPOSITORY}" ]]; then
     SHOW_ALL=`git show-branch --all | grep -w ${BRANCH}`
