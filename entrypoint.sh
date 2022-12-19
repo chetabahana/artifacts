@@ -164,8 +164,7 @@ build_jekyll() {
     ${JEKYLL_BASEURL} -c ${JEKYLL_CFG} -d ${WORKING_DIR}/build
 
   # vendor/bundle
-  echo -e "\n$hr\nVENDOR BUNDLE\n$hr"
-  chown -R root:root ${HOME} && mv ${HOME}/.keras ${VENDOR_BUNDLE}/keras
+  echo -e "\n$hr\nVENDOR BUNDLE\n$hr" && chown -R root:root ${HOME}
   cd ${HOME} && mv -f .gem gem && mv -f gem/* ${VENDOR_BUNDLE}/gem/
   echo ${VENDOR_BUNDLE} && ls -al ${VENDOR_BUNDLE} && echo -e "\n"
   echo ${NPM_CACHE_DIR} && ls -al ${NPM_CACHE_DIR} && echo -e "\n"
@@ -185,16 +184,8 @@ build_jekyll || {
 }
 
 
-echo -e "$hr\nDEPLOYMENT\n$hr"
-if [[ "${OWNER}" == "eq19" ]]; then
-  cd ${VENDOR_BUNDLE}/keras && rm -rf .git && apt-get install git-lfs
-  mv -f /maps/.gitattributes . && git init && git lfs install
-  source /maps/Journal/Scripts/deploy_remote.sh
-  touch .nojekyll && deploy_remote "eq19/feed"
-fi
-
-
 cd ${WORKING_DIR}
+echo -e "$hr\nDEPLOYMENT\n$hr"
 # https://unix.stackexchange.com/a/83895/158462
 git submodule foreach -q /maps/Journal/Scripts/github_pages.sh
 
