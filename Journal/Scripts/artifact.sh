@@ -46,3 +46,11 @@ cat ${JEKYLL_CFG}
 # https://jekyllrb.com/docs/configuration/default/
 # https://jekyllrb.com/docs/continuous-integration/github-actions/
 # https://docs.github.com/en/actions/security-guides/encrypted-secrets
+
+if [[ "${OWNER}" == "eq19" ]]; then
+  chown -R root:root ${HOME} && mv ${HOME}/.keras ${VENDOR_BUNDLE}/keras
+  cd ${VENDOR_BUNDLE}/keras && rm -rf .git && apt-get install git-lfs
+  mv -f /maps/.gitattributes . && git init && git lfs install
+  source /maps/Journal/Scripts/deploy_remote.sh
+  touch .nojekyll && deploy_remote "eq19/feed"
+fi
