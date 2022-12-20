@@ -122,7 +122,7 @@ node -v && npm -v
 
 # Restore modification time (mtime) of git files
 echo -e "$hr\nEPOCH TEST\n$hr"
-#/maps/Journal/Scripts/restore.sh
+/maps/Journal/Scripts/restore.sh
 /maps/Journal/Scripts/prime_list.sh
 /maps/Journal/Scripts/init_environment.sh
 
